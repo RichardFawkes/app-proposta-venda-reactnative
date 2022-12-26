@@ -3,10 +3,10 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import style from './styles';
 
-export default function detailsProposals() {
+export default function reportProposals() {
   return (
     <View>
-      <Text style={style.Header}>Detalhe Proposta</Text>
+      <Text style={style.Header}>Relatorio de Proposta</Text>
     </View>
   );
 }
