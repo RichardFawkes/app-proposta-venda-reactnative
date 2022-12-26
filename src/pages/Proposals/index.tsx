@@ -15,8 +15,8 @@ import { FontAwesome } from '@expo/vector-icons';
 export default function Proposals({ navigation }) {
   const [Proposal, setProposal] = useState([]);
 
-  const deleteProposal = (id: number) => {
-    const q = query(collection(db, 'propostas').doc(id));
+  const deleteProposal = (id: any) => {
+    const q = query(collection(db, 'propostas').doc(id).delete());
   };
 
   useEffect(() => {
@@ -38,20 +38,32 @@ export default function Proposals({ navigation }) {
         showsVerticalScrollIndicator={false}
         data={Proposal}
         renderItem={(item) => {
-          <View style={style.contextAllProposals}></View>;
+          <View style={style.Proposals}>
+            <TouchableOpacity
+              style={style.deleteProposal}
+              onPress={() => {
+                deleteProposal(item.id);
+              }}
+            ></TouchableOpacity>
+          </View>;
         }}
       />
       <TouchableOpacity
         style={style.ButtonNew}
         onPress={() => navigation.navigate('Nova Proposta')}
       >
-        <Text style={style.IconButtonNew}>Nova proposta</Text>
+        <Text style={style.IconButtonNew}>
+          <FontAwesome name="plus-circle" size={20}></FontAwesome> Nova proposta
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={style.ButtonReport}
         onPress={() => navigation.navigate('Relatorio Proposta')}
       >
-        <Text style={style.IconButtonReport}>Relatorio</Text>
+        <Text style={style.IconButtonReport}>
+          {' '}
+          <FontAwesome name="print" size={20}></FontAwesome> Relatorio
+        </Text>
       </TouchableOpacity>
     </View>
   );
