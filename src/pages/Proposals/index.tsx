@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import style from './styles';
@@ -7,45 +13,61 @@ import {
   collection,
   query,
   onSnapshot,
-  where,
   doc,
+  deleteDoc,
 } from '../../config/firebase';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function Proposals({ navigation }) {
-  const [Proposal, setProposal] = useState([]);
+  const [Proposal, setProposal] = useState();
+  const proposalRef = query(collection(db, 'propostas'));
 
-  const deleteProposal = (id: any) => {
-    const q = query(collection(db, 'propostas').doc(id).delete());
+  const deleteProposal = async (id) => {
+    await deleteDoc(doc(db, 'propostas', id));
   };
 
+  const q = query(collection(db, 'propostas'));
+
   useEffect(() => {
-    const q = query(collection(db, 'propostas'));
-    const unsubscribe = onSnapshot(q, (query) => {
+    onSnapshot(q, (querySnapshot) => {
       const list = [];
-      query.forEach((doc) => {
-        list.push({ ...doc.data(), id: doc.id });
+      querySnapshot.forEach((docSnapshot) => {
+        list.push({ ...docSnapshot.data(), id: docSnapshot.id });
       });
       setProposal(list);
+      console.log(`Lista2 `, Proposal);
     });
-    return () => {
-      unsubscribe();
-    };
   }, []);
+
   return (
     <View style={style.Container}>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={Proposal}
-        renderItem={(item) => {
-          <View style={style.Proposals}>
-            <TouchableOpacity
-              style={style.deleteProposal}
-              onPress={() => {
-                deleteProposal(item.id);
-              }}
-            ></TouchableOpacity>
-          </View>;
+        renderItem={(proposal) => {
+          return (
+            <View style={style.Proposals}>
+              <TouchableOpacity
+                style={style.deleteProposal}
+                onPress={() => {
+                  deleteProposal(proposal.item.id);
+                }}
+              >
+                <Text>Remove</Text>
+              </TouchableOpacity>
+              <Text
+                style={style.ProposalsItem}
+                onPress={() => {
+                  navigation.navigate('Detalhes Proposta', {
+                    user_id: proposal.item.id,
+                    user_name: proposal.item.user_name,
+                  });
+                }}
+              >
+                {proposal.item.user_name}
+              </Text>
+            </View>
+          );
         }}
       />
       <TouchableOpacity
@@ -61,7 +83,6 @@ export default function Proposals({ navigation }) {
         onPress={() => navigation.navigate('Relatorio Proposta')}
       >
         <Text style={style.IconButtonReport}>
-          {' '}
           <FontAwesome name="print" size={20}></FontAwesome> Relatorio
         </Text>
       </TouchableOpacity>

@@ -7,6 +7,10 @@ import {
   query,
   where,
   doc,
+  deleteField,
+  deleteDoc,
+  setDoc,
+  updateDoc,
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -23,4 +27,17 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-export { app, db, getFirestore, collection, onSnapshot, doc, query, where };
+export {
+  app,
+  db,
+  getFirestore,
+  collection,
+  onSnapshot,
+  doc,
+  query,
+  where,
+  deleteField,
+  deleteDoc,
+  setDoc,
+  updateDoc,
+};

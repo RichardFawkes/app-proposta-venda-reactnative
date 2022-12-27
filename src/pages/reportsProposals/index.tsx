@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import style from './styles';
 
-export default function reportProposals() {
+export default function ReportProposals() {
   return (
     <View>
       <Text style={style.Header}>Relatorio de Proposta</Text>

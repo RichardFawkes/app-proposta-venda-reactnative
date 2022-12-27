@@ -1,9 +1,18 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  Proposals: {},
+  Proposals: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 5,
+  },
   Header: {
     color: 'red',
+  },
+
+  deleteProposals: {
+    justifyContent: 'center',
+    paddingLeft: 15,
   },
   Container: {
     flex: 1,
