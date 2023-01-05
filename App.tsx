@@ -24,9 +24,45 @@ export default function App() {
             headerTintColor: '#000',
           }}
         />
-        <Stack.Screen name="Nova Proposta" component={newProposals} />
-        <Stack.Screen name="Detalhes Proposta" component={detailsProposals} />
-        <Stack.Screen name="Relatorio Proposta" component={reportProposals} />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: '#41a4f3',
+            },
+            headerTitleStyle: {
+              fontWeight: '600',
+            },
+            headerTintColor: '#000',
+          }}
+          name="Nova Proposta"
+          component={newProposals}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: '#41a4f3',
+            },
+            headerTitleStyle: {
+              fontWeight: '600',
+            },
+            headerTintColor: '#000',
+          }}
+          name="Detalhes Proposta"
+          component={detailsProposals}
+        />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: '#41a4f3',
+            },
+            headerTitleStyle: {
+              fontWeight: '600',
+            },
+            headerTintColor: '#000',
+          }}
+          name="Relatorio Proposta"
+          component={reportProposals}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

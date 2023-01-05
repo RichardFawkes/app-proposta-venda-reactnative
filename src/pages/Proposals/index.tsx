@@ -6,7 +6,6 @@ import {
   FlatList,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
 import style from './styles';
 import {
   db,
@@ -16,11 +15,12 @@ import {
   doc,
   deleteDoc,
 } from '../../config/firebase';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
+import styles from './styles';
+import { MaskedText } from 'react-native-mask-text';
 
 export default function Proposals({ navigation }) {
   const [Proposal, setProposal] = useState();
-  const proposalRef = query(collection(db, 'propostas'));
 
   const deleteProposal = async (id) => {
     await deleteDoc(doc(db, 'propostas', id));
@@ -35,7 +35,6 @@ export default function Proposals({ navigation }) {
         list.push({ ...docSnapshot.data(), id: docSnapshot.id });
       });
       setProposal(list);
-      console.log(`Lista2 `, Proposal);
     });
   }, []);
 
@@ -46,26 +45,59 @@ export default function Proposals({ navigation }) {
         data={Proposal}
         renderItem={(proposal) => {
           return (
-            <View style={style.Proposals}>
+            <View style={style.ContainerTop}>
+              {proposal.item.proposal_status ? (
+                <AntDesign name="checkcircle" size={35} color="green" />
+              ) : (
+                <Ionicons name="md-time-outline" size={35} color="black" />
+              )}
+              <View>
+                <Text style={style.ProposalsName}>
+                  {`${proposal.item.user_name} ${proposal.item.user_lastname}`}
+                </Text>
+
+                <Text style={style.ProposalsCpf}>
+                  <MaskedText mask="999.999.999-99">
+                    {proposal.item.user_cpf}
+                  </MaskedText>
+                </Text>
+                <Text style={style.ProposalsCity}>
+                  {proposal.item.user_cidade}
+                </Text>
+              </View>
+
               <TouchableOpacity
                 style={style.deleteProposal}
                 onPress={() => {
                   deleteProposal(proposal.item.id);
                 }}
               >
-                <Text>Remove</Text>
+                <Text
+                  onPress={() => {
+                    navigation.navigate('Detalhes Proposta', {
+                      user_status: proposal.item.proposal_status,
+                      user_id: proposal.item.id,
+                      user_name: proposal.item.user_name,
+                      user_lastname: proposal.item.user_lastname,
+                      user_cpf: proposal.item.user_cpf,
+                      user_cidade: proposal.item.user_cidade,
+                    });
+                  }}
+                  style={styles.buttonEdit}
+                >
+                  <FontAwesome name="edit" size={35} color="#41a4f3" />
+                </Text>
               </TouchableOpacity>
-              <Text
-                style={style.ProposalsItem}
+              <TouchableOpacity
+                style={style.deleteProposal}
                 onPress={() => {
-                  navigation.navigate('Detalhes Proposta', {
-                    user_id: proposal.item.id,
-                    user_name: proposal.item.user_name,
-                  });
+                  deleteProposal(proposal.item.id);
                 }}
               >
-                {proposal.item.user_name}
-              </Text>
+                <Text style={styles.buttonTrash}>
+                  <FontAwesome name="trash" size={35} color="red" />
+                </Text>
+              </TouchableOpacity>
             </View>
           );
         }}
@@ -75,7 +107,7 @@ export default function Proposals({ navigation }) {
         onPress={() => navigation.navigate('Nova Proposta')}
       >
         <Text style={style.IconButtonNew}>
-          <FontAwesome name="plus-circle" size={20}></FontAwesome> Nova proposta
+          <FontAwesome name="plus-circle" size={20} /> Nova proposta
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
