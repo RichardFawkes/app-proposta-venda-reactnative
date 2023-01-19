@@ -30,36 +30,43 @@ export default function DetailsProposals({ navigation, route }) {
 
   return (
     <View style={style.Container}>
+      <Text>Ativar/Desativar:</Text>
+      <Text></Text>
       <Switch
         trackColor={{ false: 'red', true: 'green' }}
         ios_backgroundColor="red"
         onValueChange={toggleSwitch}
         value={isEnabled}
       />
+      <Text></Text>
       <TextInput
         style={style.Input}
         value={dateuser}
         editable={false}
         selectTextOnFocus={false}
       />
+      <Text>Nome:</Text>
       <TextInput
         style={style.Input}
         onChangeText={setNameuser}
         value={nameuser}
         placeholder="Nome"
       />
+      <Text>Sobrenome:</Text>
       <TextInput
         style={style.Input}
         onChangeText={setLastnameuser}
         value={lastName}
         placeholder="Sobrenome"
       />
+      <Text>CPF:</Text>
       <TextInput
         style={style.Input}
         onChangeText={setCpfuser}
         value={cpfuser}
         placeholder="CPF"
       />
+      <Text>Cidade:</Text>
       <TextInput
         style={style.Input}
         onChangeText={setCityuser}
@@ -68,7 +75,7 @@ export default function DetailsProposals({ navigation, route }) {
       />
 
       <TouchableOpacity
-        style={style.buttonNewTask}
+        style={style.SaveButton}
         onPress={() => editProposal(idProposal)}
       >
         <Text style={style.iconButtonSave}>Salvar</Text>

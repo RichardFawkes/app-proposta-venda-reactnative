@@ -4,19 +4,33 @@ const styles = StyleSheet.create({
   Container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 20,
+    paddingTop: 15,
     justifyContent: 'center',
-    alignItems: 'center',
+    padding: 50,
   },
-  Header: {
-    color: 'red',
+
+  label: {
+    fontWeight: 'bold',
+    marginBottom: 5,
   },
   Input: {
-    height: 40,
-    margin: 12,
-    width: 130,
     borderWidth: 1,
+    borderColor: '#ddd',
     padding: 10,
+    fontSize: 16,
+    color: '#444',
+    marginBottom: 20,
+    borderRadius: 5,
+  },
+  SaveButton: {
+    backgroundColor: 'green',
+    padding: 10,
+    marginTop: 20,
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  iconButtonSave: {
+    color: '#fff',
   },
 });
 export default styles;

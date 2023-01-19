@@ -35,32 +35,36 @@ export default function NewProposals({ navigation }) {
         editable={false}
         selectTextOnFocus={false}
       />
+      <Text>Nome:</Text>
       <TextInput
         style={style.Input}
-        onChangeText={setNameuser}
         value={nameuser}
-        placeholder="Nome"
+        onChangeText={(text) => setNameuser(text)}
+        placeholder="Insira seu nome"
       />
+      <Text>Sobrenome:</Text>
       <TextInput
-        style={style.Input}
-        onChangeText={setLastnameuser}
         value={lastName}
-        placeholder="Sobrenome"
+        style={style.Input}
+        onChangeText={(text) => setLastnameuser(text)}
+        placeholder="Insira seu sobrenome"
       />
+      <Text>CPF:</Text>
       <MaskedTextInput
         style={style.Input}
-        onChangeText={setCpfuser}
         value={cpfuser}
-        placeholder="CPF"
+        onChangeText={(text) => setCpfuser(text)}
+        placeholder="Insira seu CPF"
         mask="999.999.999-99"
       />
+      <Text>Cidade:</Text>
       <TextInput
         style={style.Input}
-        onChangeText={setCityuser}
         value={cityuser}
-        placeholder="Cidade"
+        onChangeText={(text) => setCityuser(text)}
+        placeholder="Insira sua cidade"
       />
-      <TouchableOpacity style={style.buttonNewTask} onPress={() => handleAdd()}>
+      <TouchableOpacity style={style.SaveButton} onPress={() => handleAdd()}>
         <Text style={style.iconButtonSave}>Salvar</Text>
       </TouchableOpacity>
     </View>
