@@ -19,9 +19,9 @@ export default function ReportProposals() {
 
   const tableDb = query(collection(db, 'propostas'));
   const [proposals, setProposals] = useState<Proposal[]>([]);
-  const [counterSp, setCounterSp] = useState();
-  const [counterRj, setCounterRj] = useState();
-  const [counterMg, setCounterMg] = useState();
+  const [counterSp, setCounterSp] = useState<Number>();
+  const [counterRj, setCounterRj] = useState<Number>();
+  const [counterMg, setCounterMg] = useState<Number>();
   onSnapshot(tableDb, (querySnapshot) => {
     const list: Proposal[] = [];
 
