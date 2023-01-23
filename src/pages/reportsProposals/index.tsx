@@ -46,20 +46,27 @@ export default function ReportProposals() {
     setCounterMg(counter_mg);
   });
 
+  const colorByPosition = (index: number) => {
+    switch (index) {
+      case 0:
+        return '#f44336';
+      case 1:
+        return '#4caf50';
+      case 2:
+        return '#ffeb3b';
+      default:
+        return '#f44336';
+    }
+  };
+
   const data = [counterSp, counterRj, counterMg];
 
-  const randomColor = () =>
-    ('#' + ((Math.random() * 0xffffff) << 0).toString(16) + '000000').slice(
-      0,
-      7
-    );
-
   const pieData = data
-    .filter((value) => (value as any) > 0)
+    .filter((value) => (value as number) > 0)
     .map((value, index) => ({
       value,
       svg: {
-        fill: randomColor(),
+        fill: colorByPosition(index),
       },
       key: `pie-${index}`,
     }));
