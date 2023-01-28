@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, Text as TextLabel } from 'react-native';
 import React, { SetStateAction, useEffect, useState } from 'react';
 import style from './styles';
 import { PieChart } from 'react-native-svg-charts';
@@ -53,9 +53,9 @@ export default function ReportProposals() {
       case 1:
         return '#4caf50';
       case 2:
-        return '#ffeb3b';
+        return '#2196F3';
       default:
-        return '#f44336';
+        return '#2196F3';
     }
   };
 
@@ -105,6 +105,14 @@ export default function ReportProposals() {
 
   return (
     <View>
+      <View style={style.legendContainer}>
+        <View style={[style.legendItem, { backgroundColor: '#f44336' }]} />
+        <TextLabel style={style.legendText}>São Paulo</TextLabel>
+        <View style={[style.legendItem, { backgroundColor: '#4CAF50' }]} />
+        <TextLabel style={style.legendText}>Rio de Janeiro</TextLabel>
+        <View style={[style.legendItem, { backgroundColor: '#2196F3' }]} />
+        <TextLabel style={style.legendText}>Belo Horizonte</TextLabel>
+      </View>
       <PieChart style={{ height: 200 }} data={pieData}>
         <Label slices={[]} />
       </PieChart>
