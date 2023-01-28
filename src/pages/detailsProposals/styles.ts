@@ -32,5 +32,8 @@ const styles = StyleSheet.create({
   iconButtonSave: {
     color: '#fff',
   },
+  iconS: {
+    color: '#333',
+  },
 });
 export default styles;
