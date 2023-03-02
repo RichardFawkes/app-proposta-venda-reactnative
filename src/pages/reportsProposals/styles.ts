@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   legendText: {
-    margin: 5,
+    margin: 7,
   },
 });
 export default styles;
